@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game.gd" type="Script" id=2]
+[ext_resource path="res://sprites/Pixel.png" type="Texture" id=3]
+[ext_resource path="res://fonts/RobotoCondensed-Bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 51
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 488, 348 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
+player_packed = ExtResource( 1 )
+spawn_bounds_x = Vector2( 64, 924 )
+spawn_bounds_y = Vector2( 64, 644 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1010.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelBlue" type="Label" parent="UI/Control/VBoxContainer"]
+visible = false
+margin_right = 270.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0.74902, 1, 1 )
+text = "BLUE: 0"
+valign = 1
+
+[node name="LabelOrange" type="Label" parent="UI/Control/VBoxContainer"]
+visible = false
+margin_right = 270.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.498039, 0.309804, 1 )
+text = "ORANGE: 0"
+valign = 1
+
+[node name="LabelGreen" type="Label" parent="UI/Control/VBoxContainer"]
+visible = false
+margin_right = 270.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.678431, 1, 0.180392, 1 )
+text = "GREEN: 0"
+valign = 1
+
+[node name="LabelPurple" type="Label" parent="UI/Control/VBoxContainer"]
+visible = false
+margin_right = 270.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.729412, 0.329412, 0.831373, 1 )
+text = "PURPLE: 0	"
+valign = 1
+
+[node name="LabelRoundOver" type="Label" parent="UI/Control"]
+margin_left = 250.0
+margin_top = 300.0
+margin_right = 726.0
+margin_bottom = 418.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.352941 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoundStartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RoundOverTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Walls" type="Area2D" parent="." groups=[
+"Wall",
+]]
+priority = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2( 500, 360 )
+shape = SubResource( 3 )
+
+[node name="East" type="Sprite" parent="Walls"]
+position = Vector2( 1006, 0 )
+rotation = 1.5708
+scale = Vector2( 720, 6.9603 )
+texture = ExtResource( 3 )
+offset = Vector2( 0.5, 0.5 )
+
+[connection signal="timeout" from="RoundStartTimer" to="." method="_on_RoundStartTimer_timeout"]
+[connection signal="timeout" from="RoundOverTimer" to="." method="_on_RoundOverTimer_timeout"]
+[connection signal="area_exited" from="Walls" to="." method="_on_Walls_area_exited"]
