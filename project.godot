@@ -18,10 +18,6 @@ config/icon="res://sprites/icon.png"
 
 GlobalData="*res://global_data.gd"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=1280

@@ -127,6 +127,9 @@ custom_fonts/font = SubResource( 5 )
 text = "Press escape to exit"
 align = 1
 uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RoundStartTimer" type="Timer" parent="."]
 one_shot = true
