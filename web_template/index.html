@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kurve Godot</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+        $GODOT_HEAD_INCLUDE
+    </head>
+    <body>
+        <h1>Kurve Godot</h1>
+        <hr class="solid">
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+        <script src="$GODOT_URL"></script>
+        <script>
+            var engine = new Engine($GODOT_CONFIG);
+            engine.startGame();
+        </script>
+    </body>
+</html>

@@ -55,7 +55,8 @@ func _process(delta):
 			remaining_players -= 1
 			if remaining_players <= 1:
 				round_over()
-
+	
+	$UI/Control/FPSCounter.text = str(Engine.get_frames_per_second())
 
 func round_over():
 	$RoundOverTimer.start()
