@@ -8,12 +8,14 @@ export var player_num : int = 1
 export var speed : float = 20.0
 export var rotate_speed : float = 10.0
 export var place_point_distance : float = 5.0
-export var line_time_limit : float = 10
+export var line_time_limits : Vector2 = Vector2(5, 8)
 export var gap_time_limit : float = 0.5
 export(PackedScene) var trail_packed : PackedScene
 
 onready var sprite : Sprite = $Sprite
 onready var radius_squared = pow($CollisionShape2D.shape.radius, 2)
+
+var current_line_limit : float = 5
 var line_timer : float = 0
 var gap_timer : float = 0
 var forward : Vector2 = Vector2.UP
@@ -52,7 +54,7 @@ func _process(delta):
 		line_timer += delta
 		if position.distance_to(trail.points[-1]) > place_point_distance:
 			add_new_point()
-		if line_timer >= line_time_limit:
+		if line_timer >= current_line_limit:
 			line_timer = 0
 			drawing_line = false
 	else:
@@ -64,6 +66,7 @@ func _process(delta):
 
 
 func add_new_trail():
+	current_line_limit = rand_range(line_time_limits.x, line_time_limits.y)
 	trail = trail_packed.instance()
 	get_tree().current_scene.call_deferred("add_child", trail)
 	trail.default_color = get_player_color()

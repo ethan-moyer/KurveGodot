@@ -12,7 +12,7 @@ radius = 6.0
 "Player",
 ]]
 script = ExtResource( 2 )
-speed = 60.0
+speed = 70.0
 rotate_speed = 2.0
 place_point_distance = 7.0
 trail_packed = ExtResource( 3 )
